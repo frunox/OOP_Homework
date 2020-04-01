@@ -1,48 +1,46 @@
-// TODO: Write code to define and export the Employee class
-// define class employee
+// create a class Employee, which will be the super class for all employee types
 class Employee {
-  // constuctor function to pass parameters
+
+  //  constructor function to define properties common to all employees
   constructor(name, id, email) {
     this.name = name;
     this.id = id;
     this.email = email;
-  }
+  };
 
-  // check for valid name and request name
+  // function to check for a name, and return it's value for the current employee
   getName() {
-    // check if name entered is valid
+    //If no name is entered, it will alert error, else return the name.
     if (!this.name) {
-      console.log("Please provide valid name");
+      console.log('No name, please try again');
     } else {
-      return this.name;
+      return this.name
     }
-  }
+  };
 
-  // check for valid ID and request ID
-  getID() {
-    if (this.id) {
-      console.log("Please provide and ID number");
+  // function to check for an id, and return it's value for the current employee
+  getId() {
+    if (!this.id) {
+      console.log('No Id, please try again');
     } else {
-      return this.id;
+      return this.id
     }
-  }
+  };
 
+  // method to check for an email address, and return it's value for the current employee
   getEmail() {
-    if (this.email) {
-      console.log("Please provide and ID number");
+    if (!this.email) {
+      console.log('No Email, please try again');
     } else {
-      return this.email;
+      return this.email
     }
-  }
+  };
 
-  // assign role as employee
+  // return the employee's role
   getRole() {
-    return Employee;
-  }
-}
+    return "Employee"
+  };
+};
 
-var emp = new Employee("name", "id", "email");
-
-console.log(emp);
-
-module.exports = Employee;
+// all code here to be available in other files
+module.exports = Employee

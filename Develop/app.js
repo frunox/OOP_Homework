@@ -4,69 +4,153 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+​
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+​
 const render = require("./lib/htmlRenderer");
+​
+​
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const questions = [
-    {
-        type: 'Input',
-        message: "Enter your name",
-        name: 'name'
-    },
-    {
-        type: 'Input',
-        message: "Enter your ID",
-        name: 'id'
-    },
-    {
-        type: 'Input',
-        message: "Enter your email address",
-        name: 'email'
-    },
-    {
-        type: 'rawList',
-        message: "Choose employee's role",
-        name:  'role',
-        choices: 
-        [
-            "Manager",
-            "Engineer",
-            "Intern"
+class Team {
+  constructor(){
+    
+
+  }
+
+
+  start(){
+    inquirer
+    .prompt([
+      {
+        type: 'rawlist',
+        message: 'Select an action:',
+        name: 'action',
+        choices: [
+          'Add a Manager',
+          'Add an Engineer',
+          'Add an Intern',
+          'Exit Application'
         ]
-    },
-    {
-        input: 'input',
-        message: 'Please enter your office number',
-        name: 'officeNumber',
-        when: function (answers) {
-            return answers.role === "Manager"
-        }
-    },
-    {
-        input: 'input',
-        message: 'Please enter your gitHub user name',
-        name: 'gitHub',
-        when: function (answers) {
-            return answers.role === "Engineer"
-        }
-    },
-    {
-        input: 'input',
-        message: 'Please enter your school.',
-        name: 'school',
-        when: function (answers) {
-            return answers.role === "Intern"
-        }
-    }
-]
+      },
+    ]).then(({ action }) => {
+      switch (action) {
+        case 'Add a Manager':
+          this.addManager();
+          break;
+        case 'Add an Engineer':
+          this.addEngineer();
+          break;
+        case 'Add an Intern':
+          this.addIntern();
+          break;
+        default:
+          process.exit();
+      }
+    });
+  }
 
-// start question process
-​// inquirer.prompt(questions)
-    // .then(function({name, id , email, role }) {
+  addManager(){
+    inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'Enter Name:',
+        name: 'name'      
+      },
+      {
+        type: 'input',
+        message: 'Enter ID #:',
+        name: 'id'
+      },
+      {
+        type: 'input',
+        message: 'Enter e-mail address:',
+        name: 'email'
+      },
+      {
+        type: 'input',
+        message: 'Enter office phone number:',
+        name: 'officeNumber'
+      }
+    ]).then(async ({ name, id, email, officeNumber }) => {
+      
+      
+      
+      this.start()
+    })
+  };
 
-    // })
+  addEngineer(){
+    inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'Enter Name:',
+        name: 'name'      
+      },
+      {
+        type: 'input',
+        message: 'Enter ID #:',
+        name: 'id'
+      },
+      {
+        type: 'input',
+        message: 'Enter e-mail address:',
+        name: 'email'
+      },
+      {
+        type: 'input',
+        message: 'Enter GitHub username',
+        name: 'gitHub'
+      }    
+    ]).then(async ({ name, id, email, gitHub }) => {
+
+
+      this.start()
+    })
+  }
+
+  addIntern(){
+    inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'Enter Name:',
+        name: 'name'      
+      },
+      {
+        type: 'input',
+        message: 'Enter ID #:',
+        name: 'id'
+      },
+      {
+        type: 'input',
+        message: 'Enter e-mail address:',
+        name: 'email'
+      },
+      {
+        type: 'input',
+        message: 'Enter school name:',
+        name: 'school'
+      },
+    ]).then(async ({ name, id, email, school }) => {
+      
+
+      this.start()
+    })
+  };
+
+
+
+};
+
+  
+
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!

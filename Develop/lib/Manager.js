@@ -1,31 +1,38 @@
-// TODO: Write code to define and export the Manager class. HINT: This class should inherit from Employee.
+// create a class Manager, which extends Employee
+// allow access to the code in Employee, including the properties
+const Employee = require('./Employee')
 
-const Employee = require("./Employee");
-
+// define class Manager to include properties from Employee
 class Manager extends Employee {
+
+  // constuctor function to use properties from Employee and add new property 'officeNumber'
   constructor(name, id, email, officeNumber) {
-    // apply Employee properties to  Engineer
+
+
     super(name, id, email);
 
-    // gitHub username
     this.officeNumber = officeNumber;
+
   }
 
-  // function to retrieve gitHub information
+  // method to check that an office number is entered, and to return it
   getOfficeNumber() {
     if (!this.officeNumber) {
-      console.log("Please enter your office number");
+      console.log('No number, please try again');
     } else {
       return this.officeNumber;
     }
   }
 
-  // override role
+  // method to set this employee's role to Manager
   getRole() {
-    return Manager;
+    return "Manager"
   }
-}
 
-var manager = new Manager("name", "id", "email", "officeNumber");
+};
 
-console.log(manager);
+// make this code available to other files
+module.exports = Manager
+
+// var test2 = new Manager('name', 'id', 'email','office')
+// console.log(test2)

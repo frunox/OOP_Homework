@@ -1,30 +1,35 @@
-// TODO: Write code to define and export the Engineer class.  HINT: This class should inherit from Employee.
-const Employee = require("./Employee");
+// Create an Engineer class which extends Employee
+// require allows access to code in Employee.js
+const Employee = require('./Employee')
 
+// extend Employee  
 class Engineer extends Employee {
-  constructor(name, id, email, gitHub) {
-    // apply Employee properties to  Engineer
+
+  // constructor function, uses keys from Employee, adds github
+  constructor(name, id, email, github) {
+
+    // capture these properties from Employee
     super(name, id, email);
+    // add new property for engineers
+    this.github = github;
+  };
 
-    // gitHub username
-    this.gitHub = gitHub;
-  }
-
-  // function to retrieve gitHub information
-  getGitHub() {
-    if (!this.getGitHub) {
-      console.log("Please enter your gitHub user name");
+  // method to check for that a github user name is entered and to return it to index.js
+  getGithub() {
+    if (!this.github) {
+      // console.log('No input, try again');
     } else {
-      return this.gitHub;
+      // console.log(this.github)
+      return this.github
     }
   }
 
-  // override role
+  // define this employee's role as Engineer
   getRole() {
-    return Engineer;
+    return "Engineer"
   }
-}
+};
 
-var newEng = new Engineer("name", "id", "email", "gitHub");
+// allow this code to be accessed by other files
+module.exports = Engineer
 
-console.log(newEng);
